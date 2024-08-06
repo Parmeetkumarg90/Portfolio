@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stone Paper Scissor</title>
+    <style>
+        #full {
+            width: 100%;
+            height: 100%;
+            font-family: cursive;
+        }
+
+        #head,
+        #foot {
+            width: 100%;
+            height: 20%;
+            background-color: rgb(0, 0, 0);
+            color: #ff0707;
+            text-align: center;
+            padding-top: 2%;
+            padding-bottom: 2%;
+            font-weight: bolder;
+            font-size: larger;
+            box-shadow: 0px 0px 15px 10px rgb(110, 241, 224);
+        }
+
+        p {
+            border: 3px solid black;
+            text-align: center;
+            text-align: center;
+            font-weight: bolder;
+            font-size: xx-large;
+        }
+
+        #main1,
+        #main2,
+        #main3 {
+            width: 100%;
+            height: 20%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        #main1 img {
+            width: 50%;
+            height: 100%;
+            border-radius: 100%;
+            border: 3px dotted transparent;
+        }
+
+        #main1 img:hover {
+            border-radius: 100%;
+            border: 3px dotted gray;
+        }
+
+        #main1 button {
+            background-color: white;
+            border: transparent;
+        }
+
+        #main3 button {
+            border: 3px solid black;
+            background-color: rgb(110, 145, 241);
+            text-align: center;
+            text-align: center;
+            font-weight: bolder;
+            font-size: xx-large;
+            font-family: cursive;
+            border-top-left-radius: 30%;
+            border-bottom-right-radius: 30%;
+        }
+
+        #main3 button:hover {
+            box-shadow: 0px 0px 15px 10px rgb(110, 241, 224);
+        }
+
+        .score {
+            display: flex;
+            flex-direction: column;
+        }
+
+        main p {
+            box-shadow: 0px 0px 15px 10px rgb(243, 74, 74);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="full">
+        <header>
+            <div id="head">
+                Let's Play Stone Paper Scissor
+            </div>
+        </header>
+        <main>
+            <p>Choose Any One</p>
+            <div id="main1">
+                <button onclick="calculate(0)">
+                    <img src="Images/stone.png" alt="error">
+                </button>
+                <button onclick="calculate(1)">
+                    <img src="Images/paper.png" alt="error">
+                </button>
+                <button onclick="calculate(2)">
+                    <img src="Images/scissor.png" alt="error">
+                </button>
+            </div>
+            <div id="main2">
+                <div class="score">
+                    <p>Your's Score</p>
+                    <p id="yresult">0</p>
+                </div>
+                <div class="score">
+                    <p>Computer's Score</p>
+                    <p id="cresult">0</p>
+                </div>
+            </div>
+            <div id="main3">
+                <button onclick="location.reload()">Reset</button>
+                <button onclick="final()">Final Result</button>
+            </div>
+            <p id="overall">Let's start the game</p>
+        </main>
+        <footer>
+            <div id="foot">
+                Come Back Again
+            </div>
+        </footer>
+    </div>
+</body>
+<script>
+    let i = 0, j = 0;
+    let user = document.getElementById("yresult");
+    let computer = document.getElementById("cresult");
+    let result = document.getElementById("overall");
+    let arr = ["Stone", "Paper", "Scissor"];
+    function calculate(num) {
+        let c_choice = arr[Math.floor((Math.random()) * 3)];
+        let u_choice = arr[num];
+        result.style.backgroundColor = "yellow";
+        result.style.color = "green";
+        if ((c_choice == "Stone") && (u_choice == "Paper")) {
+            i = i + 1;
+            user.innerText = i;
+            result.innerText = "You Wins";
+        }
+        else if ((c_choice == "Paper") && (u_choice == "Scissor")) {
+            i = i + 1;
+            user.innerText = i;
+            result.innerText = "You Wins";
+        }
+        else if ((c_choice == "Scissor") && (u_choice == "Stone")) {
+            i = i + 1;
+            user.innerText = i;
+            result.innerText = "You Wins";
+        }
+        else if (u_choice == c_choice) {
+            alert("It's a draw");
+        }
+        else {
+            j = j + 1;
+            computer.innerText = j;
+            result.innerText = "Computer Wins";
+        }
+    }
+    let final = () => {
+        if (i > j) {
+            result.innerText = "User Wins Overally";
+        }
+        else if (i < j) {
+            result.innerText = "Computer Wins Overally";
+        }
+        else if ((i == 0) && (j == 0)) {
+            result.innerText = "Start the game first";
+        }
+        else {
+            result.innerText = "It's a draw match";
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission Form</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            background: url(Images/cropped-vincentiu-solomon-ln5drpv_ImI-unsplash-1-1.webp) no-repeat;
+            background-size: cover;
+            color: white;
+        }
+
+        #full {
+            width: 50vw;
+            border: 8px solid rgb(217, 255, 0);
+            border-radius: 10%;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 2px 40px 2px black;
+        }
+
+        p {
+            width: 80%;
+            height: 50%;
+            margin-left: 10%;
+            border-radius: 25%;
+            box-shadow: 2px 2px 30px 2px rgb(0, 0, 0);
+            border: 2px solid rgb(0, 0, 0);
+            font-weight: bolder;
+            font-size: xx-large;
+            background-color: red;
+            text-align: center;
+        }
+
+        table {
+            width: 50vw;
+            height: auto;
+            overflow: hidden;
+        }
+
+        .button {
+            width: 40%;
+            height: 5%;
+            cursor: grab;
+            margin-left: 30%;
+            margin-bottom: 2%;
+            color: yellow;
+            background-color: blue;
+        }
+
+        #button input {
+            background-color: green;
+        }
+
+        #enterdata div {
+            margin-top: 3%;
+            margin-bottom: 3%;
+            text-align: center;
+            font-weight: bolder;
+            font-size: x-large;
+        }
+
+        #table {
+            border: 1px solid white;
+        }
+
+        #enterdata div input {
+            width: 40%;
+            height: 14%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="full">
+        <header>
+            <p>Welcome To Code Quotient Portal</p>
+        </header>
+        <main>
+            <input type="button" class="button" value="Add new Admission" onclick="hide()">
+            <div id="show" style="visibility:hidden;">
+                <div id="enterdata">
+                    <div>
+                        Your Degree Name :
+                        <input type="text" name="degree" required>
+                    </div>
+                    <div>
+                        Your Degree Year :
+                        <input type="date" name="year" required>
+                    </div>
+                    <div>
+                        Your Registration Number :
+                        <input type="number" name="reg" required>
+                    </div>
+                    <div>
+                        Your University Name :
+                        <input type="text" name="university" required>
+                    </div>
+                </div>
+                <div id="button">
+                    <input type="button" onclick="getdata()" value="Submit" name="Submit" class="button">
+                    <input type="button" onclick="cancel()" VALUE="Cancel" style="background-color: rgb(255, 0, 0);"
+                        class="button">
+                </div>
+            </div>
+            <div id="table">
+                <table border="2" align="center" cellpadding="10px" cellspacing="3px">
+                    <thead>
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Degree</th>
+                            <th>Year</th>
+                            <th>Registration Number</th>
+                            <th>University</th>
+                            <th>Modification</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <footer>
+                <p>Thankyou for visiting us</p>
+            </footer>
+        </main>
+    </div>
+</body>
+<script>
+    function hide() {
+        let x = document.getElementById('show');
+        let att = x.getAttribute("style");
+        if (att == "visibility:hidden;") {
+            x.setAttribute("style", "visibility:visible;");
+        }
+        else {
+            x.setAttribute("style", "visibility:hidden;");
+        }
+        document.getElementsByName('Submit')[0].removeAttribute('disabled');
+    }
+    function cancel() {
+        document.getElementsByName('degree')[0].value = "";
+        document.getElementsByName('year')[0].value = "";
+        document.getElementsByName('reg')[0].value = "";
+        document.getElementsByName('university')[0].value = "";
+        hide();
+    }
+    var count = 1;
+    function getdata() {
+        const new1 = document.createElement('tr');
+        let name = document.getElementsByName('degree')[0].value, year = document.getElementsByName('year')[0].value, reg = document.getElementsByName('reg')[0].value, univ = document.getElementsByName('university')[0].value;
+
+        document.getElementsByName('degree')[0].value = "";
+        document.getElementsByName('year')[0].value = "";
+        document.getElementsByName('reg')[0].value = "";
+        document.getElementsByName('university')[0].value = "";
+
+
+        let td1 = document.createElement('td');
+        td1.innerText = count;
+        let td2 = document.createElement('td');
+        td2.innerText = name;
+        let td3 = document.createElement('td');
+        td3.innerText = year;
+        let td4 = document.createElement('td');
+        td4.innerText = reg;
+        let td5 = document.createElement('td');
+        td5.innerText = univ;
+        let td6 = document.createElement('input');
+        td6.setAttribute("type", "button");
+        td6.setAttribute("class", "button");
+        td6.setAttribute("value", "Edit");
+        td6.setAttribute("onclick", "edit(this.parentNode)");
+        let td7 = document.createElement('input');
+        td7.setAttribute("type", "button");
+        td7.setAttribute("class", "button");
+        td7.setAttribute("value", "Delete");
+        td7.setAttribute("style", "width:auto;");
+        td7.setAttribute("onclick", "del(this.parentNode)");
+        new1.appendChild(td1);
+        new1.appendChild(td2);
+        new1.appendChild(td3);
+        new1.appendChild(td4);
+        new1.appendChild(td5);
+        new1.appendChild(td6);
+        new1.appendChild(td7);
+        document.getElementsByTagName("tbody")[0].appendChild(new1);
+        count++;
+
+        let disable = document.getElementsByName('Submit')[0];
+        disable.setAttribute("disabled", "1")
+        hide();
+    }
+    function del(elem) {
+        elem.remove();
+    }
+    function edit(element) {
+        hide();
+        let srno = element.children[0].innerText;
+        let name = element.children[1].innerText;
+        let year = element.children[2].innerText;
+        let reg = element.children[3].innerText;
+        let univ = element.children[4].innerText;
+        let x=count;
+        this.count = srno;
+        document.getElementsByName('degree')[0].value = name;
+        document.getElementsByName('year')[0].value = year;
+        document.getElementsByName('reg')[0].value = reg;
+        document.getElementsByName('university')[0].value = univ;
+        del(element);
+        count=x;
+    }
+</script>
+
+</html>
