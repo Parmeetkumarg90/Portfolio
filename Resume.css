@@ -30,10 +30,12 @@ footer {
     width: 100vw;
     height: auto;
     background-color: rgb(177, 255, 60);
-    font-size: 5vh;
+    font-size: 3vh;
     margin-bottom: 1%;
     margin-top: 1%;
     border-radius: 50px;
+    position: sticky;
+    bottom: 0;
 }
 
 nav {
@@ -94,6 +96,7 @@ main {
     width: 84%;
     display: flex;
     justify-content: center;
+    position: relative;/*change*/
     flex-direction: row;
 }
 
@@ -132,10 +135,6 @@ button {
     width: 20vw;
     height: 15vh;
     background-color: rgb(41, 253, 243);
-}
-
-.cont img:hover {
-    -webkit-filter: invert(100%);
 }
 
 iframe {
